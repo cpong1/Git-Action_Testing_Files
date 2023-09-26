@@ -23,13 +23,16 @@ jobs:
       - name: Check Chrome Version
         run: google-chrome-stable --version
 
-      - name: Download and Install ChromeDriver
+      - name: Set Up ChromeDriver
         run: |
-          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
-          CHROME_DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          wget "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip -d /usr/local/bin
-          chmod +x /usr/local/bin/chromedriver
+          # Set the path to your locally stored ChromeDriver executable
+          CHROMEDRIVER_PATH=C:\Users\cpong\.wdm\drivers\chromedriver\<version>\chromedriver.exe
+      
+          # Make the ChromeDriver executable
+          chmod +x $CHROMEDRIVER_PATH
+      
+          # Add the directory containing ChromeDriver to the PATH
+          echo "export PATH=\$PATH:$(dirname $CHROMEDRIVER_PATH)" >> $GITHUB_ENV
       
 
       - name: Get ChromeDriver Version
