@@ -15,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest  # Specify the runner environment
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # This step checks out your repository's code
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
