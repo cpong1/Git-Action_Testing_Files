@@ -19,9 +19,18 @@ jobs:
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
     steps:
-      # check chromw version
+      # check chrome version
       - name: Check Chrome Version
         run: google-chrome-stable --version
+
+      - name: Download and Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
+          CHROME_DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          wget "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip -d /usr/local/bin
+          chmod +x /usr/local/bin/chromedriver
+      
 
       - name: Get ChromeDriver Version
         run: chromedriver --version
