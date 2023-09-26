@@ -23,16 +23,9 @@ jobs:
       - name: Check Chrome Version
         run: google-chrome-stable --version
 
-      - name: Set Up ChromeDriver
-        run: |
-          # Set the path to your locally stored ChromeDriver executable
-          CHROMEDRIVER_PATH=C:\Users\cpong\Downloads\chrome-win64
-      
-          # Make the ChromeDriver executable
-          chmod +x $CHROMEDRIVER_PATH
-      
-          # Add the directory containing ChromeDriver to the PATH
-          echo "export PATH=\$PATH:$(dirname $CHROMEDRIVER_PATH)" >> $GITHUB_ENV
+      - name: setup-chromedriver
+        uses: nanasess/setup-chromedriver@v2.2.0
+    
       
 
       - name: Get ChromeDriver Version
