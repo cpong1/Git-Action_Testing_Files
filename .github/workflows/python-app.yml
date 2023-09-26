@@ -26,8 +26,6 @@ jobs:
       - name: setup-chromedriver
         uses: nanasess/setup-chromedriver@v2.2.0
     
-      
-
       - name: Get ChromeDriver Version
         run: chromedriver --version
         id: chromedriver-version
@@ -54,7 +52,8 @@ jobs:
           pip install pytest            
           pip install selenium==3.141.0
           pip install webdriver_manager
-          pip install --upgrade webdriver_manager      
+          pip install --upgrade webdriver_manager    
+        timeout-minutes: 10  # Increase the timeout as needed  
 
       - name: Run Python Tests
         run: |
