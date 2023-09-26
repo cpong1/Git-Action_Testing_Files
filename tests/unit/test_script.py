@@ -5,14 +5,17 @@ import time
 
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 
-# create webdriver object
-driver = webdriver.Chrome()
+# Configure ChromeOptions if needed (e.g., for headless mode)
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')  # Add any other desired options
+
+# Use ChromeDriverManager to download and manage ChromeDriver
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+
 # get url
 driver.get("http://127.0.0.1:5500/templates/index.html")
 
