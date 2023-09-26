@@ -53,7 +53,7 @@ jobs:
           pip install selenium==3.141.0
           pip install webdriver_manager
           pip install --upgrade webdriver_manager    
-        timeout-minutes: 10  # Increase the timeout as needed  
+        timeout-minutes: 20  # Increase the timeout as needed  
 
       - name: Run Python Tests
         run: |
