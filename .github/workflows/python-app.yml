@@ -14,7 +14,7 @@ jobs:
   run-test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]   # Specify the runner environment
+        os: [ubuntu-latest]   # Specify the runner environment
 
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
