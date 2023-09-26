@@ -19,13 +19,9 @@ jobs:
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
     steps:
-      - name: Install Chrome
-        run: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb
-          sudo apt-get install -f
-          google-chrome-stable --version
-        timeout-minutes: 15 # Increase the timeout to 15 minutes (or adjust as needed)
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.2.3
+  
 
       # check chrome version
       - name: Check Chrome Version
