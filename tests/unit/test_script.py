@@ -14,7 +14,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')  # Add any other desired options
 
 # Use ChromeDriverManager to download and manage ChromeDriver
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
 
 # get url
 driver.get("http://127.0.0.1:5500/templates/index.html")
