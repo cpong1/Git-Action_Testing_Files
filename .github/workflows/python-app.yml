@@ -21,7 +21,6 @@ jobs:
 
     - name: Run Python Tests
       run: |
-        cd ..
         pytest tests/unit/BrowseRoleListings.py 
 
     - name: Upload Test Results
