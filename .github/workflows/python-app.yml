@@ -46,14 +46,22 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install dependencies
-        run: | 
-          python -m pip install -U pip
-          pip install pytest            
-          pip install selenium==3.141.0
-          pip install webdriver_manager
-          pip install --upgrade webdriver_manager    
-        timeout-minutes: 20  # Increase the timeout as needed  
+
+      # Installing dependencies
+      - name: Install pip (upgrade)
+        run: python -m pip install -U pip
+      
+      - name: Install pytest
+        run: pip install pytest
+      
+      - name: Install Selenium
+        run: pip install selenium==3.141.0
+      
+      - name: Install WebDriverManager
+        run: pip install webdriver_manager
+      
+      - name: Upgrade WebDriverManager
+        run: pip install --upgrade webdriver_manager  
 
       - name: Run Python Tests
         run: |
