@@ -25,6 +25,7 @@ jobs:
           sudo dpkg -i google-chrome-stable_current_amd64.deb
           sudo apt-get install -f
           google-chrome-stable --version
+        timeout-minutes: 15 # Increase the timeout to 15 minutes (or adjust as needed)
 
       # check chrome version
       - name: Check Chrome Version
