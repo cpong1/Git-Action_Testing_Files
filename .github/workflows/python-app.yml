@@ -37,7 +37,7 @@ jobs:
       - name: Compare Versions
         run: |
           chrome_version=$(echo "${{ steps.check-chrome-version.outputs.stdout }}" | cut -d ' ' -f 3)
-          chromedriver_version=$(echo "${{ steps.chromedriver-version.outputs.stdout }}" | cut -d ' ' -f 2)
+          chromedriver_version=$(echo "${{ steps.get-chromedriver-version.outputs.stdout }}" | cut -d ' ' -f 2)
           
           if [ "$chrome_version" == "$chromedriver_version" ]; then
             echo "Chrome and ChromeDriver versions match: $chrome_version"
