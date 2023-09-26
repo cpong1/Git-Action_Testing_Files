@@ -26,7 +26,7 @@ jobs:
       - name: Set Up ChromeDriver
         run: |
           # Set the path to your locally stored ChromeDriver executable
-          CHROMEDRIVER_PATH=C:\Users\cpong\.wdm\drivers\chromedriver\<version>\chromedriver.exe
+          CHROMEDRIVER_PATH=C:\Users\cpong\Downloads\chrome-win64
       
           # Make the ChromeDriver executable
           chmod +x $CHROMEDRIVER_PATH
