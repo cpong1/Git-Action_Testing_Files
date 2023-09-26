@@ -21,7 +21,7 @@ jobs:
 
     - name: Run Python Tests
       run: |
-        pytest tests/unit/BrowseRoleListings.py 
+        pytest ./tests/unit/BrowseRoleListings.py 
 
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
