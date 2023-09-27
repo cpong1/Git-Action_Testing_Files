@@ -2,6 +2,7 @@
 import pytest
 from selenium import webdriver
 import time
+import os
 
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -12,17 +13,21 @@ from selenium.common.exceptions import NoSuchElementException
 
 # Define ChromeOptions to run headless
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 
 # Use ChromeDriverManager to download and manage ChromeDriver
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-# driver = webdriver.Chrome(ChromeDriverManager().install())
+
+# Get the GitHub username from the environment variable
+github_username = os.environ.get("GITHUB_USERNAME")
+print(github_username)
 
 # Define the URL of your GitHub Pages site
-github_pages_url = "https://yourusername.github.io/Git-Action_Testing_Files/templates/index.html"
+github_pages_url = f"https://{github_username}.github.io/Git-Action_Testing_Files/templates/index.html"
+
 
 # Navigate to your application URL
-# driver.get(github_pages_url)
+driver.get(github_pages_url)
 
 # get url
 # only works if we are using live server on our local machine in vs code
@@ -145,7 +150,7 @@ def test_ReadRoleListing_pos():
         print("Test case failed.")
 
 
-test_BrowseRoleListings()
-test_CreateRoleListings_pos()
-test_ReadRoleListing_pos()
+# test_BrowseRoleListings()
+# test_CreateRoleListings_pos()
+# test_ReadRoleListing_pos()
 print("All test cases passed successfully!")
