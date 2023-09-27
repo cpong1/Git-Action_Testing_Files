@@ -20,7 +20,6 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_option
 
 # Get the GitHub username from the environment variable
 github_username = os.environ.get("GITHUB_USERNAME")
-print(github_username)
 
 # Define the URL of your GitHub Pages site
 github_pages_url = f"https://{github_username}.github.io/Git-Action_Testing_Files/templates/index.html"
@@ -150,7 +149,7 @@ def test_ReadRoleListing_pos():
         print("Test case failed.")
 
 
-# test_BrowseRoleListings()
+test_BrowseRoleListings()
 # test_CreateRoleListings_pos()
 # test_ReadRoleListing_pos()
 print("All test cases passed successfully!")
