@@ -55,7 +55,7 @@ def test_CreateRoleListings_pos():
     # find create new role listing button and create a new role listing
     element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
     element.click()
-    time.sleep(1)
+    time.sleep(10)
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
     roleTitle = "Sales Representative"
     dropdown.select_by_visible_text(roleTitle)
