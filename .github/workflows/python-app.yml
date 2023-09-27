@@ -19,6 +19,8 @@ jobs:
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
     steps:
+      - run: npm run build --if-present
+      
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1.2.3
   
