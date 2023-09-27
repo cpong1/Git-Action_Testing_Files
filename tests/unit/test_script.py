@@ -19,10 +19,10 @@ chrome_options.add_argument("--headless")
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
 # Get the GitHub username from the environment variable
-github_username = os.environ.get("GITHUB_USERNAME")
+# github_username = os.environ.get("GITHUB_USERNAME")
 
 # Define the URL of your GitHub Pages site
-github_pages_url = f"https://{github_username}.github.io/Git-Action_Testing_Files/templates/index.html"
+github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/templates/index.html"
 
 
 # Navigate to your application URL
