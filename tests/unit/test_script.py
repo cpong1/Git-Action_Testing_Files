@@ -57,6 +57,7 @@ def test_CreateRoleListings_pos():
     element.click()
     time.sleep(10)
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
+    time.sleep(10)
     roleTitle = "Sales Representative"
     dropdown.select_by_visible_text(roleTitle)
 
