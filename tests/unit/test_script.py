@@ -13,13 +13,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 # Define ChromeOptions to run headless
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 
 # Use ChromeDriverManager to download and manage ChromeDriver
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-
-# Get the GitHub username from the environment variable
-# github_username = os.environ.get("GITHUB_USERNAME")
 
 # Define the URL of your GitHub Pages site
 github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/templates/index.html"
@@ -93,12 +90,13 @@ def test_CreateRoleListings_pos():
     # Locate all job title elements and closing date elements
     job_title_elements = driver.find_elements(By.CSS_SELECTOR, ".card-title.m-2")
     closing_date_elements = driver.find_elements(By.XPATH, "//div[contains(@class, 'text-center')]/h5[contains(text(), 'Closing Date:')]")
-
+    print(1)
+    print(closing_date_elements)
     # Ensure there are job titles and closing dates
     if job_title_elements and closing_date_elements:
         # Get the latest job title and closing date
-        latest_job_title = job_title_elements[-1].text
-        latest_closing_date_element = closing_date_elements[-1]
+        latest_job_title = job_title_elements[0].text
+        latest_closing_date_element = closing_date_elements[0]
         
         latest_closing_date_text = latest_closing_date_element.text.split(":")[1].strip()
 
@@ -149,7 +147,7 @@ def test_ReadRoleListing_pos():
         print("Test case failed.")
 
 
-test_BrowseRoleListings()
-# test_CreateRoleListings_pos()
+# test_BrowseRoleListings()
+test_CreateRoleListings_pos()
 # test_ReadRoleListing_pos()
 print("All test cases passed successfully!")
