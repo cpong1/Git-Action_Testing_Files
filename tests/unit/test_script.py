@@ -19,7 +19,7 @@ chrome_options.add_argument("--headless")
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
 # Define the URL of your GitHub Pages site
-github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/templates/index.html"
+github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/frontend/index.html"
 
 
 # Navigate to your application URL
@@ -148,7 +148,7 @@ def test_ReadRoleListing_pos():
         print("Test case failed.")
 
 
-# test_BrowseRoleListings()
+test_BrowseRoleListings()
 test_CreateRoleListings_pos()
-# test_ReadRoleListing_pos()
+test_ReadRoleListing_pos()
 print("All test cases passed successfully!")
