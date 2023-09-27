@@ -10,12 +10,24 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 
-# Use ChromeDriverManager to download and manage ChromeDriver
-driver = webdriver.Chrome(ChromeDriverManager().install())
+# Define ChromeOptions to run headless
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
 
+# Use ChromeDriverManager to download and manage ChromeDriver
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+# driver = webdriver.Chrome(ChromeDriverManager().install())
+
+# Define the URL of your GitHub Pages site
+github_pages_url = "https://yourusername.github.io/Git-Action_Testing_Files/templates/index.html"
+
+# Navigate to your application URL
+# driver.get(github_pages_url)
 
 # get url
-driver.get("http://127.0.0.1:5500/templates/index.html")
+# only works if we are using live server on our local machine in vs code
+# driver.get("http://127.0.0.1:5500/templates/index.html")
+
 
 def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
@@ -83,6 +95,7 @@ def test_CreateRoleListings_pos():
         # Get the latest job title and closing date
         latest_job_title = job_title_elements[-1].text
         latest_closing_date_element = closing_date_elements[-1]
+        
         latest_closing_date_text = latest_closing_date_element.text.split(":")[1].strip()
 
         # Check if the latest closing date matches the expected date
