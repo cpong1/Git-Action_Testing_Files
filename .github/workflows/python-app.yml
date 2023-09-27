@@ -52,8 +52,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set GitHub Username as Environment Variable
-        run: |
-          GITHUB_USERNAME : ${{ secrets.USERNAME }}" 
+        run: echo "GITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }}" >> $GITHUB_ENV
+        shell: bash
         
 
       # Installing dependencies
