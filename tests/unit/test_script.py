@@ -44,7 +44,7 @@ def test_BrowseRoleListings():
 
     print("End of Test Case")
 
-def test_CreateRoleListings_pos():
+def CreateRoleListings_pos():
     time.sleep(1)
     expected_closing_dates = {}
     # ensure that 'hr' is clicked
@@ -149,6 +149,6 @@ def test_ReadRoleListing_pos():
 
 
 test_BrowseRoleListings()
-test_CreateRoleListings_pos()
+CreateRoleListings_pos()
 test_ReadRoleListing_pos()
 print("All test cases passed successfully!")
