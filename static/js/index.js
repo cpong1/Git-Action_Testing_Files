@@ -98,6 +98,7 @@ const jobsPage = Vue.createApp({
           console.log(error);
         });
     },
+    
     getRolesSkills() {
         axios
           .get(get_roles_skills_URL)

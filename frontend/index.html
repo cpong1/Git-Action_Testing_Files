@@ -183,6 +183,28 @@
     </div>
 
     </div>
+</body>
+</html>
+    <!--Retrieve role information from url parameter [used for testing]-->
+    <script>
+        // Function to get the 'role' query parameter from the URL
+        function getRoleFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('role') || ''; // Default to '' if 'role' is not in the URL
+        }
+        // Select the radio button according to the role information obtained 
+        const roleType = getRoleFromURL();
+        // Get the radio input elements by their IDs
+        const hrRadio = document.getElementById("hr");
+        const staffRadio = document.getElementById("staff");
+
+        // Check the radio button based on the value
+        if (roleType === "hr") {
+            hrRadio.checked = true;
+        } else {
+            staffRadio.checked = true;
+        }
+    </script>
     <!-- jQuery code to update the selected role dynamically -->
     <script>
         $(document).ready(function () {

@@ -1,20 +1,10 @@
-# import webdriver
-import pytest
-from selenium import webdriver
-import time
+from webdriver_imports import *
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
+# Define the URL of your GitHub Pages site
+github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/frontend/index.html?role=staff"
 
-# create webdriver object
-driver = webdriver.Chrome()
-# get url
-driver.get("http://127.0.0.1:5500/templates/index.html")
-
-# ensure that 'staff' is clicked
-staff = driver.find_element(By.ID, "staff")
-staff.click()
+# Navigate to your application URL
+driver.get(github_pages_url)
 
 listings = "listing_list"
 try:
