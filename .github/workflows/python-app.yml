@@ -18,6 +18,9 @@ jobs:
 
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
+    env:
+      GITHUB_USERNAME: ${{ secrets.USERNAME }}  # Access and set a GitHub secret as an environment variable
+
     steps:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1.2.3
@@ -49,12 +52,7 @@ jobs:
           fi
 
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set GitHub Username as Environment Variable
-        run: echo "GITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }}" >> $GITHUB_ENV
-        shell: bash
-        
+        uses: actions/checkout@v3      
 
       # Installing dependencies
       - name: Install pip (upgrade)
