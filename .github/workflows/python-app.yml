@@ -69,6 +69,12 @@ jobs:
       - name: Upgrade WebDriverManager
         run: pip install --upgrade webdriver_manager  
 
+      - name: Start ngrok and expose Flask API
+        run: |
+          npm install -g ngrok   # Install ngrok globally
+          ngrok http 5100 &   # Replace 5000 with the port your Flask API is running on
+          sleep 5   # Wait for ngrok to start
+
       - name: Run Python Tests
         run: |
           pytest tests/unit
