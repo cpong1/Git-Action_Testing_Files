@@ -18,16 +18,9 @@ chrome_options.add_argument("--headless")
 # Use ChromeDriverManager to download and manage ChromeDriver
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
-# Define the URL of your GitHub Pages site
-github_pages_url = f"https://cpong1.github.io/Git-Action_Testing_Files/frontend/index.html"
-
-
-# Navigate to your application URL
-driver.get(github_pages_url)
-
 # get url
 # only works if we are using live server on our local machine in vs code
-# driver.get("http://127.0.0.1:5500/templates/index.html")
+driver.get("http://127.0.0.1:5500/templates/index.html")
 
 
 def test_BrowseRoleListings():
