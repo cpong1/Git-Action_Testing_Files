@@ -31,12 +31,6 @@ jobs:
       
       - name: Install Selenium
         run: pip install selenium==3.141.0
-      
-      - name: Install WebDriverManager
-        run: pip install webdriver_manager
-      
-      - name: Upgrade WebDriverManager
-        run: pip install --upgrade webdriver_manager  
 
       - name: Run Python Tests
         run: |
