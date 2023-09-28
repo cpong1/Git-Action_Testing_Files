@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Define ChromeOptions to run headless
 chrome_options = webdriver.ChromeOptions()
@@ -49,6 +51,8 @@ def test_CreateRoleListings():
     time.sleep(1)
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
     roleTitle = "Sales Representative"
+    wait = WebDriverWait(driver, 10)  # Adjust the timeout as needed
+    element = wait.until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'Sales Representative')))
     dropdown.select_by_visible_text(roleTitle)
 
     # Locate the input field that opens the date picker and enter in a date
