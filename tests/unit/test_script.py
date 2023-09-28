@@ -64,7 +64,7 @@ def test_CreateRoleListings():
     driver.save_screenshot('screenshot.png')
 
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
-    roleTitle = "Sales Representative"
+    roleTitle = "Data Analyst"
     
     # Get all the options in the dropdown
     options = dropdown.options
