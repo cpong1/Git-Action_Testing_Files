@@ -1,0 +1,79 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  run-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]   # Specify the runner environment
+
+    runs-on: ${{ matrix.os }}  # Set the runner operating system
+
+    steps:
+      - run: npm run build --if-present
+      
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.2.3
+  
+      # check chrome version
+      - name: Check Chrome Version
+        run: google-chrome-stable --version
+
+      - name: setup-chromedriver
+        uses: nanasess/setup-chromedriver@v2.2.0
+    
+      - name: Get ChromeDriver Version
+        run: chromedriver --version
+        id: chromedriver-version
+  
+      - name: Compare Versions
+        run: |
+          chrome_version=$(echo "${{ steps['Check Chrome Version'].outputs.stdout }}" | cut -d ' ' -f 3)
+          chromedriver_version=$(echo "${{ steps['Get ChromeDriver Version'].outputs.stdout }}" | cut -d ' ' -f 2)
+          
+          if [ "$chrome_version" == "$chromedriver_version" ]; then
+            echo "Chrome and ChromeDriver versions match: $chrome_version"
+          else
+            echo "Chrome and ChromeDriver versions do not match:"
+            echo "Chrome version: $chrome_version"
+            echo "ChromeDriver version: $chromedriver_version"
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v3      
+
+      # Installing dependencies
+      - name: Install pip (upgrade)
+        run: python -m pip install -U pip
+      
+      - name: Install pytest
+        run: pip install pytest
+      
+      - name: Install Selenium
+        run: pip install selenium==3.141.0
+      
+      - name: Install WebDriverManager
+        run: pip install webdriver_manager
+      
+      - name: Upgrade WebDriverManager
+        run: pip install --upgrade webdriver_manager  
+
+      - name: Run Python Tests
+        run: |
+          pytest tests/unit
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: pytest-results.xml
