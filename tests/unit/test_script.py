@@ -51,8 +51,14 @@ def test_CreateRoleListings():
     time.sleep(1)
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
     roleTitle = "Sales Representative"
-    wait = WebDriverWait(driver, 10)  # Adjust the timeout as needed
-    element = wait.until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'Sales Representative')))
+    
+    # Get all the options in the dropdown
+    options = dropdown.options
+
+    # Loop through the options and print their text
+    for option in options:
+        print(option.text)
+
     dropdown.select_by_visible_text(roleTitle)
 
     # Locate the input field that opens the date picker and enter in a date
