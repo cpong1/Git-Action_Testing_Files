@@ -31,6 +31,7 @@ def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
     staff = driver.find_element(By.ID, "staff")
     staff.click()
+    time.sleep(1)
 
     # check if create button exist
     try:
@@ -38,20 +39,19 @@ def test_BrowseRoleListings():
         print("Test case failed. Create button should not exist.")
     except NoSuchElementException:
         # This block will be executed if the element is not found
-        print("Create button does not exist. Test case passed.")
+        print("Create button does not exist.")
 
-    # Capture a screenshot and save it
-    driver.save_screenshot('screenshot.png')
 
     listings = "listing_list"
     try:
         element = driver.find_element("id", listings)
+        # Capture a screenshot and save it
+        driver.save_screenshot('staff_browseTC_Screenshot.png')
         print("Listings found.")
     except NoSuchElementException:
         print("No listings found.")
 
     print("End of Test Case")
-
 
 
 def test_ReadRoleListing_pos():
@@ -61,9 +61,15 @@ def test_ReadRoleListing_pos():
     staff.click()
 
     # find create new role listing button
+    time.sleep(1)
     element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
     actual_create_name = element.text
     expected_create_name = "Create a Job Listing"
+    element.click()
+
+
+    time.sleep(1)
+    driver.save_screenshot('create_modal.png')
 
     # search for job listings 
     listings = "listing_list"
@@ -83,7 +89,7 @@ def test_ReadRoleListing_pos():
     # check conditions
     if (actual_create_name == expected_create_name) and listingLoaded and (actual_edit_name == expected_edit_name):
         # Capture a screenshot and save it
-        driver.save_screenshot('screenshot.png')
+        driver.save_screenshot('hr_browseTC_Screenshot.png')
         print("Test case passed!")
     else:
         print("Test case failed.")
