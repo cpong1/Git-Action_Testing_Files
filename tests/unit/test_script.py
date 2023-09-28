@@ -2,6 +2,7 @@
 import pytest
 from selenium import webdriver
 import time
+import logging
 
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -11,6 +12,9 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+# Configure logging
+logging.basicConfig(filename='selenium.log', level=logging.INFO)
 
 # Define ChromeOptions to run headless
 chrome_options = webdriver.ChromeOptions()
@@ -27,6 +31,9 @@ def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
     staff = driver.find_element(By.ID, "staff")
     staff.click()
+
+    # Capture a screenshot and save it
+    driver.save_screenshot('screenshot.png')
 
     listings = "listing_list"
     try:
@@ -45,10 +52,17 @@ def test_CreateRoleListings():
     staff.click()
     time.sleep(1)
 
+    # Capture a screenshot and save it
+    driver.save_screenshot('screenshot.png')
+
     # find create new role listing button and create a new role listing
     element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
     element.click()
     time.sleep(1)
+
+    # Capture a screenshot and save it
+    driver.save_screenshot('screenshot.png')
+
     dropdown = Select(driver.find_element(By.ID, "roleTitle")) 
     roleTitle = "Sales Representative"
     
