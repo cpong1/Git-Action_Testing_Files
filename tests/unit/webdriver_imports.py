@@ -21,4 +21,4 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_option
 
 # get url
 # only works if we are using live server on our local machine in vs code
-driver.get("http://127.0.0.1:5500/templates/index.html")
+driver.get("http://127.0.0.1:5500/frontend/index.html")
