@@ -19,34 +19,6 @@ jobs:
     runs-on: ${{ matrix.os }}  # Set the runner operating system
 
     steps:     
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.2.3
-  
-      # check chrome version
-      - name: Check Chrome Version
-        run: google-chrome-stable --version
-
-      - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v2.2.0
-    
-      - name: Get ChromeDriver Version
-        run: chromedriver --version
-        id: chromedriver-version
-  
-      - name: Compare Versions
-        run: |
-          chrome_version=$(echo "${{ steps['Check Chrome Version'].outputs.stdout }}" | cut -d ' ' -f 3)
-          chromedriver_version=$(echo "${{ steps['Get ChromeDriver Version'].outputs.stdout }}" | cut -d ' ' -f 2)
-          
-          if [ "$chrome_version" == "$chromedriver_version" ]; then
-            echo "Chrome and ChromeDriver versions match: $chrome_version"
-          else
-            echo "Chrome and ChromeDriver versions do not match:"
-            echo "Chrome version: $chrome_version"
-            echo "ChromeDriver version: $chromedriver_version"
-            exit 1
-          fi
-
       - name: Checkout
         uses: actions/checkout@v3      
 
