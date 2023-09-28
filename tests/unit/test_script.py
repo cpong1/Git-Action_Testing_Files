@@ -33,10 +33,12 @@ def test_BrowseRoleListings():
     staff.click()
 
     # check if create button exist
-    element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
-    if element:
+    try:
+        driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
         print("Test case failed. Create button should not exist.")
-        return ""
+    except NoSuchElementException:
+        # This block will be executed if the element is not found
+        print("Create button does not exist. Test case passed.")
 
     # Capture a screenshot and save it
     driver.save_screenshot('screenshot.png')
