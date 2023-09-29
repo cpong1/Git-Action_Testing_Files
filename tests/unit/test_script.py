@@ -26,6 +26,7 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_option
 
 # get url
 # only works if we are using live server on our local machine in vs code
+time.sleep(10)
 driver.get("https://git-action-testing-files.vercel.app/")
 
 def test_BrowseRoleListings():
