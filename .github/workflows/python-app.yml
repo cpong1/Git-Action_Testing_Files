@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: screenshots  # Name of the first artifact
-          path: ./screenshots
+          path: ./screenshots/
 
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v2
