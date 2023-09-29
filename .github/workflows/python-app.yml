@@ -42,11 +42,17 @@ jobs:
         run: |
           pytest tests/unit
 
-      - name: Upload Screenshots
+      - name: Upload Screenshot 1
         uses: actions/upload-artifact@v2
         with:
-          name: screenshots  # Name of the first artifact
-          path: ./screenshots/
+          name: screenshot_1  # Name of the first artifact
+           path: ./screenshots/screenshot_1.png
+        
+      - name: Upload Screenshot 2
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot_2  # Name of the second artifact
+          path: ./screenshots/screenshot_2.png
 
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v2
