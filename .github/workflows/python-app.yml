@@ -41,15 +41,10 @@ jobs:
       - name: Run Python Tests
         run: |
           pytest tests/unit
+          file_path = 'screenshots/'
 
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v2
       #   with:
       #     name: test-results
       #     path: pytest-results.xml
-
-      - name: Upload Logs and Screenshots
-        uses: actions/upload-artifact@v2
-        with:
-          name: screenshots  # This is the name of the artifact
-          path: ./Screenshots  # This is the folder path to upload
