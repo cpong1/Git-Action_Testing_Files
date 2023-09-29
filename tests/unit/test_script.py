@@ -59,8 +59,7 @@ def test_BrowseRoleListings():
         # Now you can work with the number of listings as needed
         print("Number of Listings:", number_of_listings)
         # Capture a screenshot and save it
-        screenshot_path = f'./screenshots/screenshot_1.png'
-        driver.save_screenshot(screenshot_path)
+        driver.save_screenshot("screenshot_1.png")
         index +=1 
         print("Listings found.")
     except NoSuchElementException:
@@ -74,9 +73,7 @@ def ReadRoleListings():
     time.sleep(1)
 
     # Capture a screenshot and save it
-    screenshot_path = f'{screenshot_directory}screenshot_2.png'
-    driver.save_screenshot(screenshot_path)
-    index +=1
+    driver.save_screenshot("screenshot_2.png")
 
 #     # find create new role listing button
 #     element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
