@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <!-- Job Listings -->
-                <div id="listing_list" class="col-md-9">
+                <div class="col-md-9">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <h2>Job Listings</h2>
@@ -145,7 +145,7 @@
 
                     <!-- Add job listings here -->
                     <!-- Replace dummy card with these variables -->
-                    <div v-for="job in jobListings">
+                    <div v-for="job in jobListings" id="listing_list">
                         <div id="{{job.JobList_ID}}" class="card mb-4">
                             <div class="card-body">
                                 <div class="row">

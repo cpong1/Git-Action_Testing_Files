@@ -29,7 +29,7 @@ driver.get("https://git-action-testing-files.vercel.app/")
 
 def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
-    staff = driver.find_element(By.ID, "hr")
+    staff = driver.find_element(By.ID, "staff")
     staff.click()
     time.sleep(1)
 
@@ -44,7 +44,17 @@ def test_BrowseRoleListings():
 
     listings = "listing_list"
     try:
-        driver.find_element("id", listings)
+        # Find the parent div element with id="listing_list"
+        parent_div = driver.find_element_by_id("listing_list")
+
+        # Find all child elements representing individual listings
+        listing_elements = parent_div.find_elements_by_css_selector(".card.mb-4")
+
+        # Get the number of listings
+        number_of_listings = len(listing_elements)
+
+        # Now you can work with the number of listings as needed
+        print("Number of Listings:", number_of_listings)
         # Capture a screenshot and save it
         driver.save_screenshot('staff_browseTC_Screenshot.png')
         print("Listings found.")
@@ -53,6 +63,40 @@ def test_BrowseRoleListings():
 
     print("End of Test Case")
 
+def ReadRoleListings(): 
+    hr = driver.find_element(By.ID, "hr")
+    hr.click()
+    time.sleep(1)
+
+    # Capture a screenshot and save it
+    driver.save_screenshot('staff_browseTC_Screenshot.png')
+
+    # find create new role listing button
+    element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
+    actual_create_name = element.text
+    expected_create_name = "Create a Job Listing"
+
+    # search for job listings 
+    listings = "listing_list"
+    try:
+        element = driver.find_element("id", listings)
+        print("Listings found.")
+        listingLoaded = True
+    except NoSuchElementException:
+        print("No listings found.")
+        listingLoaded = False
+
+    # search for edit button
+    edit = driver.find_element(By.XPATH, "//button[@class='btn btn-link']")
+    actual_edit_name = edit.text
+    expected_edit_name = "Edit"
+
+    # check conditions
+    if (actual_create_name == expected_create_name) and listingLoaded and (actual_edit_name == expected_edit_name):
+        print("Test case passed!")
+    else:
+        print("Test case failed.")
 
 test_BrowseRoleListings()
+ReadRoleListings()
 print("All test cases passed successfully!")
