@@ -1,4 +1,4 @@
-const get_roles_URL = "127.0.0.1:5100/roles";
+const get_roles_URL = "http:localhost:5100/roles";
 const get_roles_description_URL = "127.0.0.1:5100/rolesDescription";
 const get_roles_skills_URL = "127.0.0.1:5100/rolesSkills";
 const get_joblistings_URL = "127.0.0.1:5100/joblistings";
