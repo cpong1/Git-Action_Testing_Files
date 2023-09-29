@@ -26,7 +26,6 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_option
 # get url
 # only works if we are using live server on our local machine in vs code
 driver.get("https://git-action-testing-files.vercel.app/")
-index = 1
 # Define the directory path relative to the current working directory
 screenshot_directory = './screenshots/'
 
@@ -60,7 +59,6 @@ def test_BrowseRoleListings():
         print("Number of Listings:", number_of_listings)
         # Capture a screenshot and save it
         driver.save_screenshot("screenshot_1.png")
-        index +=1 
         print("Listings found.")
     except NoSuchElementException:
         print("No listings found.")
@@ -101,6 +99,6 @@ def ReadRoleListings():
 #     else:
 #         print("Test case failed.")
 
-# test_BrowseRoleListings()
-# ReadRoleListings()
+test_BrowseRoleListings()
+ReadRoleListings()
 # print("All test cases passed successfully!")
