@@ -28,7 +28,7 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_option
 driver.get("https://git-action-testing-files.vercel.app/")
 index = 1
 # Define the directory path relative to the current working directory
-screenshot_directory = 'screenshots/'
+screenshot_directory = './screenshots/'
 
 def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
