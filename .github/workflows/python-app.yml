@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: screenshots  # This is the name of the artifact
-          path: staff_browseTC_Screenshot.png
+          path: ./screenshots  # This is the folder path to upload
