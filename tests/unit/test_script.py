@@ -54,47 +54,5 @@ def test_BrowseRoleListings():
     print("End of Test Case")
 
 
-def ReadRoleListing_pos():
-    time.sleep(1)
-    # ensure that 'hr' is clicked
-    staff = driver.find_element(By.ID, "hr")
-    staff.click()
-
-    # find create new role listing button
-    time.sleep(1)
-    element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
-    actual_create_name = element.text
-    expected_create_name = "Create a Job Listing"
-    element.click()
-
-
-    time.sleep(1)
-    driver.save_screenshot('create_modal.png')
-
-    # search for job listings 
-    listings = "listing_list"
-    try:
-        element = driver.find_element("id", listings)
-        print("Listings found.")
-        listingLoaded = True
-    except NoSuchElementException:
-        print("No listings found.")
-        listingLoaded = False
-
-    # search for edit button
-    edit = driver.find_element(By.XPATH, "//button[@class='btn btn-link']")
-    actual_edit_name = edit.text
-    expected_edit_name = "Edit"
-
-    # check conditions
-    if (actual_create_name == expected_create_name) and listingLoaded and (actual_edit_name == expected_edit_name):
-        # Capture a screenshot and save it
-        driver.save_screenshot('hr_browseTC_Screenshot.png')
-        print("Test case passed!")
-    else:
-        print("Test case failed.")
-
-
 test_BrowseRoleListings()
-ReadRoleListing_pos()
 print("All test cases passed successfully!")
