@@ -54,7 +54,7 @@ def test_BrowseRoleListings():
     print("End of Test Case")
 
 
-def test_ReadRoleListing_pos():
+def ReadRoleListing_pos():
     time.sleep(1)
     # ensure that 'hr' is clicked
     staff = driver.find_element(By.ID, "hr")
@@ -96,5 +96,5 @@ def test_ReadRoleListing_pos():
 
 
 test_BrowseRoleListings()
-test_ReadRoleListing_pos()
+ReadRoleListing_pos()
 print("All test cases passed successfully!")
