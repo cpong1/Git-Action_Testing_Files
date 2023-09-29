@@ -29,7 +29,7 @@ driver.get("https://git-action-testing-files.vercel.app/")
 
 def test_BrowseRoleListings():
     # ensure that 'staff' is clicked
-    staff = driver.find_element(By.ID, "staff")
+    staff = driver.find_element(By.ID, "hr")
     staff.click()
     time.sleep(1)
 
@@ -44,7 +44,7 @@ def test_BrowseRoleListings():
 
     listings = "listing_list"
     try:
-        element = driver.find_element("id", listings)
+        driver.find_element("id", listings)
         # Capture a screenshot and save it
         driver.save_screenshot('staff_browseTC_Screenshot.png')
         print("Listings found.")
