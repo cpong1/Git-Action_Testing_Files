@@ -69,7 +69,7 @@ def ReadRoleListings():
     time.sleep(1)
 
     # Capture a screenshot and save it
-    driver.save_screenshot('staff_browseTC_Screenshot.png')
+    driver.save_screenshot('Screenshot.png')
 
 #     # find create new role listing button
 #     element = driver.find_element(By.XPATH, "//button[@class='btn btn-dark']")
