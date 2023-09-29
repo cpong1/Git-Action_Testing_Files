@@ -51,7 +51,5 @@ jobs:
       - name: Upload Logs and Screenshots
         uses: actions/upload-artifact@v2
         with:
-          name: selenium-logs-screenshots
-          path: |
-            selenium.log
-            screenshot.png
+          name: screenshots  # This is the name of the artifact
+          path: /home/runner/work/Git-Action_Testing_Files/Git-Action_Testing_Files/staff_browseTC_Screenshot.png

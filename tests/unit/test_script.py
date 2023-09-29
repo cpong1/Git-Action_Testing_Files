@@ -46,7 +46,7 @@ def test_BrowseRoleListings():
     try:
         element = driver.find_element("id", listings)
         # Capture a screenshot and save it
-        driver.save_screenshot('/home/runner/work/Git-Action_Testing_Files/Git-Action_Testing_Filesstaff_browseTC_Screenshot.png')
+        driver.save_screenshot('staff_browseTC_Screenshot.png')
         print("Listings found.")
     except NoSuchElementException:
         print("No listings found.")
