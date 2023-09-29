@@ -43,6 +43,10 @@ def test_BrowseRoleListings():
         # This block will be executed if the element is not found
         print("Create button does not exist.")
 
+    time.sleep(10)
+    screenshot_path = os.path.join(os.getcwd(), "screenshot_1.png")
+    driver.save_screenshot(screenshot_path)
+
 
     listings = "listing_list"
     try:
@@ -69,7 +73,7 @@ def test_BrowseRoleListings():
 def ReadRoleListings(): 
     hr = driver.find_element(By.ID, "hr")
     hr.click()
-    time.sleep(1)
+    time.sleep(10)
 
     # Capture a screenshot and save it
     screenshot_path = os.path.join(os.getcwd(), "screenshot_2.png")
