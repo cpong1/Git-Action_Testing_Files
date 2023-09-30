@@ -24,7 +24,10 @@ def check_os():
     elif system == 'Darwin':
         return 'mysql+mysqlconnector://root:root@localhost:3306/SPM_KUIH'  # For macOS
     else:
-        raise ValueError("Unsupported operating system")
+        # raise ValueError("Unsupported operating system")
+        # For unsupported operating systems, provide a default database URI or handle it as needed.
+        print("Unsupported operating system. Using default database URI.")
+        return 'mysql+mysqlconnector://root@localhost:3306/SPM_KUIH'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = check_os()  # Set the URI based on the OS
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
