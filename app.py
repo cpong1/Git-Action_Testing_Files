@@ -4,7 +4,6 @@ from sqlalchemy import *
 from flask_cors import CORS
 
 import os
-import sys
 import platform
 
 # -------------- Import for Job Listing /createListing (START) --------------
