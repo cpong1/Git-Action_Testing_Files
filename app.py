@@ -93,6 +93,9 @@ class RoleSkill(db.Model):
         }
 
 
+@app.route('/')
+def home():
+    return "Hello World"
 
 # Get all roles in company
 @app.route("/roles")
