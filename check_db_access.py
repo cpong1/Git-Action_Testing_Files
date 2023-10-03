@@ -4,9 +4,9 @@ try:
     # Replace with your database connection details
     connection = mysql.connector.connect(
         host="localhost",
-        user="",
+        user="root",
         database="test",
-        password="root"
+        password=""
     )
 
     if connection.is_connected():
