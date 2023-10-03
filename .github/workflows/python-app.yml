@@ -60,7 +60,9 @@ jobs:
       - run: sudo systemctl start mysql.service
       - run: cat tests/unit/test.sql | sudo mysql -u root --password=root 
 
-
+      - name: Check Database Accessibility
+        run: python check_db_access.py
+        
       - name: Run Python Tests
         run: |
           pytest tests/unit
