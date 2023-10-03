@@ -63,6 +63,11 @@ jobs:
       - name: Install mysql-connector-python
         run: pip install mysql-connector-python
 
+      - name: install mysql client
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y  mysql-client 
+
       - name: Check Database Accessibility
         run: python check_db_access.py
 
