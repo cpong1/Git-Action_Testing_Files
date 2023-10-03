@@ -38,6 +38,29 @@ jobs:
       - name: Upgrade WebDriverManager
         run: pip install --upgrade webdriver_manager  
 
+      - name: Setting up a MySQL database using a Docker container
+        uses: mirromutth/mysql-action@v1.1
+        with: 
+          host port: 3306
+          container port: 3306
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mysql version: '8.0'
+          mysql database: 'test'
+          mysql root password: ''
+          mysql user: 'developer'
+          mysql password: 'me'
+
+      - run: mysql --version
+      - run: ls
+      - run: sudo apt-get install libmysqlclient-dev
+      - run: sudo apt-get install zliblg-dev
+      - run: pip3 install mysqlclient
+      - run: pip3 install SQLAlchemy
+      - run: sudo systemctl start mysql.service
+      - run: cat tests/unit/test.sql | mysql -u root
+
+
       - name: Run Python Tests
         run: |
           pytest tests/unit
