@@ -1,5 +1,6 @@
 CREATE SCHEMA test;
 USE test;
+
 CREATE TABLE AccessRights (
     Access_ID int PRIMARY KEY,
     Access_type varchar(50) NOT NULL
@@ -51,8 +52,6 @@ CREATE TABLE Job_Application (
     FOREIGN KEY (JobList_ID) REFERENCES Job_Listing(JobList_ID),
     FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID)
 );
-
-USE SPM_KUIH;
 
 -- Insert data into the Role table
 INSERT INTO Role (Role_Name, role_desc)
