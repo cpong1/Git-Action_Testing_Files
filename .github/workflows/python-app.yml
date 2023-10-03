@@ -47,9 +47,9 @@ jobs:
           collation server: 'utf8_general_ci'
           mysql version: '8.0'
           mysql database: 'test'
-          mysql root password: ''
-          mysql user: 'developer'
-          mysql password: 'me'
+          mysql root password: 'root'
+          mysql user: ''
+          mysql password: ''
 
       - run: mysql --version
       - run: ls
@@ -58,7 +58,7 @@ jobs:
       - run: pip3 install mysqlclient
       - run: pip3 install SQLAlchemy
       - run: sudo systemctl start mysql.service
-      - run: cat tests/unit/test.sql | sudo mysql -u root 
+      - run: cat tests/unit/test.sql | sudo mysql -u root --password=root 
 
 
       - name: Run Python Tests
