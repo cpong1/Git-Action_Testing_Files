@@ -231,7 +231,7 @@ def createListing():
 if __name__ == "__main__":
     print("This is flask " + os.path.basename(__file__) +
           " for All-in-one Skill-based Role Portal (SBRP)")
-    app.run(host="0.0.0.0", port=5100, debug=True)
+    app.run(host="0.0.0.0", port=5110, debug=True)
     # Notes for the parameters:
     # - debug=True will reload the program automatically if a change is detected;
     #   -- it in fact starts two instances of the same flask program, and uses one of the instances to monitor the program changes;
