@@ -170,6 +170,7 @@ def test_CreateRoleListings():
         print("No job titles or closing dates found.")
 
     print("Test case finished!")
+    time(10)
     screenshot_path = os.path.join(os.getcwd(), "screenshot_4.png")
     driver.save_screenshot(screenshot_path)
 

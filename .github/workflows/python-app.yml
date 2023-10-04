@@ -89,29 +89,29 @@ jobs:
         run: |
           pytest tests/unit
 
-      - name: Upload Screenshot 1
+      - name: Upload Screenshot 
         uses: actions/upload-artifact@v2
         with:
-          name: screenshots
+          name: Screenshot
           path: ${{ github.workspace }}/screenshot_1.png
           if-no-files-found: warn
         
-      - name: Upload Screenshot 2
+      - name: Upload Screenshot 
         uses: actions/upload-artifact@v2
         with:
-          name: screenshot_2  # Name of the second artifact
+          name: Screenshot  # Name of the second artifact
           path: ${{ github.workspace }}/screenshot_2.png
 
-      - name: Upload Screenshot 2
+      - name: Upload Screenshot 
         uses: actions/upload-artifact@v2
         with:
-          name: screenshot_2  # Name of the second artifact
+          name: Screenshot  # Name of the second artifact
           path: ${{ github.workspace }}/screenshot_3.png
 
-      - name: Upload Screenshot 2
+      - name: Upload Screenshot 
         uses: actions/upload-artifact@v2
         with:
-          name: screenshot_2  # Name of the second artifact
+          name: Screenshot  # Name of the second artifact
           path: ${{ github.workspace }}/screenshot_4.png
 
       # - name: Upload Test Results
