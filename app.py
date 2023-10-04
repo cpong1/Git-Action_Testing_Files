@@ -24,7 +24,7 @@ def check_os():
     elif system == 'Darwin':
         return 'mysql+mysqlconnector://root:root@localhost:3306/SPM_KUIH'  # For macOS
     else:
-        return 'mysql+mysqlconnector://root@localhost:3306/test'
+        return 'mysql+mysqlconnector://root:root@localhost:3306/test'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = check_os()  # Set the URI based on the OS
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
