@@ -119,7 +119,7 @@ def test_CreateRoleListings():
 
     # Locate the input field that opens the date picker and enter in a date
     year = "2023"
-    month = "09"
+    month = "11"
     day = "27"
     date = f"{year}-{month}-{day}"
     date_input = driver.find_element(By.ID, "closingDate")
