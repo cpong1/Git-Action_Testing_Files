@@ -83,7 +83,7 @@ jobs:
         run: |
           export FLASK_APP=app.py
           export FLASK_ENV=development
-          flask run --host=0.0.0.0 &
+          flask run --host=0.0.0.0 &        
 
       - name: Run Python Tests
         run: |
@@ -101,6 +101,18 @@ jobs:
         with:
           name: screenshot_2  # Name of the second artifact
           path: ${{ github.workspace }}/screenshot_2.png
+
+      - name: Upload Screenshot 2
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot_2  # Name of the second artifact
+          path: ${{ github.workspace }}/screenshot_3.png
+
+      - name: Upload Screenshot 2
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot_2  # Name of the second artifact
+          path: ${{ github.workspace }}/screenshot_4.png
 
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v2
