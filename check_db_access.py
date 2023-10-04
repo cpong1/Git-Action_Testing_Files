@@ -3,10 +3,10 @@ import mysql.connector
 try:
     # Replace with your database connection details
     connection = mysql.connector.connect(
-        host="localhost",
+        host="127.0.0.1",
         user="root",
         database="test",
-        password=""
+        password="root"
     )
 
     if connection.is_connected():
