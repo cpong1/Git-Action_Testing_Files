@@ -142,6 +142,9 @@ def test_CreateRoleListings():
 
     # close modal
     close = driver.find_element(By.XPATH, "//button[@data-bs-dismiss='modal']")
+    time.sleep(10)
+    screenshot_path = os.path.join(os.getcwd(), "screenshot_4.png")
+    driver.save_screenshot(screenshot_path)
     close.click()
 
     expected_closing_dates[roleTitle] = date # add to dictionary
@@ -170,9 +173,7 @@ def test_CreateRoleListings():
         print("No job titles or closing dates found.")
 
     print("Test case finished!")
-    time.sleep(10)
-    screenshot_path = os.path.join(os.getcwd(), "screenshot_4.png")
-    driver.save_screenshot(screenshot_path)
+    
 
 BrowseRoleListings()
 ReadRoleListings()
