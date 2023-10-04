@@ -49,7 +49,7 @@ jobs:
           mysql database: 'test'
           mysql root password: ''
           mysql user: 'root'
-          mysql password: ''
+          mysql password: 'root'
 
       - name: Install mysql-connector-python
         run: pip install mysql-connector-python
