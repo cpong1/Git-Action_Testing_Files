@@ -41,6 +41,8 @@ jobs:
       - name: Install Flask
         run: |
           pip install flask
+          pip install flask_sqlalchemy
+          pip install flask_cors
 
       - name: Setting up a MySQL database using a Docker container
         uses: mirromutth/mysql-action@v1.1
