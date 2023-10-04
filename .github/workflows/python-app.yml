@@ -37,6 +37,10 @@ jobs:
       
       - name: Upgrade WebDriverManager
         run: pip install --upgrade webdriver_manager  
+      
+      - name: Install Flask
+        run: |
+          pip install flask
 
       - name: Setting up a MySQL database using a Docker container
         uses: mirromutth/mysql-action@v1.1
