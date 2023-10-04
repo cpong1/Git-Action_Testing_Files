@@ -78,6 +78,7 @@ const jobsPage = Vue.createApp({
         .get(get_roles_URL)
         .then((response) => {
           this.roles = response.data["data"]["roles"].map((role) => role.Role_Name);
+          console.log(this.roles)
         })
         .catch(error => {
           // Errors when calling the service; such as network error, 
