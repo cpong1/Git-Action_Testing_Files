@@ -1,7 +1,7 @@
-const get_roles_URL = "http://127.0.0.1:5100/roles";
-const get_roles_description_URL = "http://127.0.0.1:5100/rolesDescription";
-const get_roles_skills_URL = "http://127.0.0.1:5100/rolesSkills";
-const get_joblistings_URL = "http://127.0.0.1:5100/joblistings";
+const get_roles_URL = "http://127.0.0.1:5000/roles";
+const get_roles_description_URL = "http://127.0.0.1:5000/rolesDescription";
+const get_roles_skills_URL = "http://127.0.0.1:5000/rolesSkills";
+const get_joblistings_URL = "http://127.0.0.1:5000/joblistings";
 
 // Vue
 const jobsPage = Vue.createApp({
