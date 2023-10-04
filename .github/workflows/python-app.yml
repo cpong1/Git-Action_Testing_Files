@@ -47,10 +47,20 @@ jobs:
           collation server: 'utf8_general_ci'
           mysql version: '8.0'
           mysql database: 'test'
-          mysql root password: 'root'
-          mysql user: ''
+          mysql root password: ''
+          mysql user: 'root'
           mysql password: ''
 
+      - name: Install mysql-connector-python
+        run: pip install mysql-connector-python
+  
+      - name: install mysql client
+        run: |
+              sudo apt-get update
+              sudo apt-get install -y  mysql-client 
+      - run: |
+              sudo /etc/init.d/mysql start
+  
       - run: mysql --version
       - run: ls
       - run: sudo apt-get install libmysqlclient-dev
@@ -59,16 +69,6 @@ jobs:
       - run: pip3 install SQLAlchemy
       - run: sudo systemctl start mysql.service
       - run: cat tests/unit/test.sql | sudo mysql -u root --password=root 
-
-      - name: Install mysql-connector-python
-        run: pip install mysql-connector-python
-
-      - name: install mysql client
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y  mysql-client 
-      - run: |
-            sudo /etc/init.d/mysql start
 
       - name: Check Database Accessibility
         run: python check_db_access.py
