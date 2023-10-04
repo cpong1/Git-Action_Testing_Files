@@ -19,7 +19,7 @@ logging.basicConfig(filename='selenium.log', level=logging.INFO)
 
 # Define ChromeOptions to run headless
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 
 # Use ChromeDriverManager to download and manage ChromeDriver
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
