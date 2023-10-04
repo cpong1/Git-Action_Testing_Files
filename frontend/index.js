@@ -84,7 +84,6 @@ const jobsPage = Vue.createApp({
           // Errors when calling the service; such as network error, 
           // service offline, etc
           console.log(error);
-
         });
 
     },
