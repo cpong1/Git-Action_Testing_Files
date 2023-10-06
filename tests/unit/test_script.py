@@ -146,7 +146,7 @@ def CreateRoleListings():
     driver.save_screenshot(screenshot_path)
     close.click()
 
-    expected_closing_dates[roleTitle] = date # add to dictionary
+    expected_closing_dates[roleTitle] = formatted_date # add to dictionary
 
     # Locate all job title elements and closing date elements
     job_title_elements = driver.find_elements(By.CSS_SELECTOR, ".card-title.m-2")
