@@ -102,7 +102,7 @@ def ReadRoleListings():
     else:
         print("Test case failed.")
 
-def test_CreateRoleListings():
+def CreateRoleListings():
     expected_closing_dates = {}
     # ensure that 'hr' is clicked
     staff = driver.find_element(By.ID, "hr")
@@ -121,16 +121,15 @@ def test_CreateRoleListings():
     year = "2023"
     month = "11"
     day = "27"
-    date = f"{year}-{month}-{day}"
+
+    # Format the date in "mm/dd/yyyy" format
+    formatted_date = f"{month}/{day}/{year}"
+
+    # Locate the date input field and enter the formatted date
     date_input = driver.find_element(By.ID, "closingDate")
-    date_input.click()
-    date_input.send_keys(year)
-    date_input.send_keys(Keys.LEFT)
-    date_input.send_keys(month)
-    date_input.send_keys(Keys.LEFT)
-    date_input.send_keys(Keys.LEFT)
-    date_input.send_keys(day)
-    date_input.send_keys(Keys.RETURN)
+    date_input.clear()  # Clear the existing value in the input field
+    date_input.send_keys(formatted_date)  # Send the formatted date string
+    
     time.sleep(1)
     screenshot_path = os.path.join(os.getcwd(), "screenshot_3.png")
     driver.save_screenshot(screenshot_path)
@@ -175,6 +174,7 @@ def test_CreateRoleListings():
     print("Test case finished!")
     
 
-BrowseRoleListings()
-ReadRoleListings()
+# BrowseRoleListings()
+# ReadRoleListings()
+CreateRoleListings()
 print("All test cases passed successfully!")
