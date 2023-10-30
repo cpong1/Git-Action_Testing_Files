@@ -1,0 +1,27 @@
+.nav-color {
+    background-color: rgb(1, 1, 39)
+}
+
+.profile-icon {
+    color: rgb(255, 255, 255);
+}
+
+.input-group-append {
+    cursor: pointer;
+}
+
+.user-skill-label {
+    margin-left: 5px; 
+    margin-right: 5px; /* Add some space between labels */
+    font-size: 13px;
+}
+
+.collapsed {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis; /* for more text*/
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Adjust the number of lines you want to display */ 
+    -webkit-box-orient: vertical;
+    transition: max-height 0.3s ease;
+} 

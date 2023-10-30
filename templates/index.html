@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Library for the datepicker in the create job listings and dropdown in create job listings-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Popper library for dropdown and dropdown -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+</head>
+
+<body>
+    <div id="jobsPage">
+        <!-- Navbar component -->
+        <Navbar :access_right="accessRight"></Navbar>
+    
+        <div class="container mt-4">
+            <div class="row">
+
+                <!-- Left Sidebar - Filter Menu -->
+                <div class="col-md-3" id="filter_menu">
+
+                    <!--Select user type here for current sprint-->
+                    <input type="radio" id="hr" name="user_type" value=1 v-model="accessRight" :checked="accessRight === '1'"
+                        @change="getAllJobListings">
+                    &nbsp;
+                    <label for="hr"> HR </label>
+                    &nbsp;&nbsp;
+                    <input type="radio" id="staff" name="user_type" value=0 v-model="accessRight" :checked="accessRight === '0'"
+                        @change="getAllJobListings">
+                    &nbsp;
+                    <label for="staff"> Staff </label>
+                    <!----------------------------END OF USER-TYPE SELECTION CODES---------------------------------->
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Filter By</h5>
+                            <form>
+                                <!-- Add additional filter options here -->
+                                <div style="overflow-y: scroll; max-height: 150px;">
+                                    <label for="alignmentPercentage">Alignment Percentage:</label>
+                                    <input type="range" id="alignmentPercentage" name="alignmentPercentage" min="0" max="100" v-model="alignmentPercentage" @input="filterByAlignment">
+                                </div>
+                                <input type="number" v-model="alignmentPercentage" min="0" max="100" class="form-control mb-3">
+                                <div class="container mt-3">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                      Filter By Skills
+                                    </button>
+                                </div>
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                  
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Filter By Skills</h4>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                  
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <form id="skillsForm">
+                                                <div v-for="(skillsGroup, groupIndex) in allSkills" :key="groupIndex">
+                                                    <div v-for="(skill, index) in skillsGroup" :key="index" class="form-check">
+                                                        <input type="checkbox" :id="'skillCheckbox' + groupIndex + index" :value="skill" v-model="selectedSkills" @input="filterBySkills">
+                                                        <label class="form-check-label" :for="'skillCheckbox' + groupIndex + index">{{ skill }}</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                  
+                                      </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Job Listings -->
+                <div id="listing_list" class="col-md-9">
+                    <div class="row mb-1">
+                        <div class="col-md-4">
+                            <h2>Job Listings</h2>
+                        </div>
+                        
+                    </div>
+                    <!--Search bar-->
+                    <div class="">
+                        <input id="searchInput" v-model="searchInput" type="text" class="form-control me-2" @keyup="filterJobListings()" @keydown="handleBackspace($event)" :placeholder="changePlaceholder()">
+                        <div class="d-flex justify-content-end mb-2">
+                            <input type="radio" id="job" name="searchby" value=0 v-model="searchBy" @click="emptySearchbar()" checked>
+                            <label for="job"> Search by Job Title </label>
+                            &nbsp;&nbsp;
+                            <input class="searchSkillName" type="radio" id="staff" name="searchby" v-model="searchBy" value=1 @click="emptySearchbar()"> <!--@change="getSearchedJobListings"-->
+                            <label for="skillname"> Search by Skill Name </label>
+                        </div>
+                    </div>
+                    <div v-if="jobListings.length === 0" class="fs-5">
+                        No open job listings for now.
+                    </div>
+
+                    <!-- Job listing cards -->
+                    <div v-for="job in jobListings" id="joblist_parent">
+                        <div id="{{job.JobList_ID}}" class="card mb-4 job_listing">
+                            <div v-if="skill_match_dict[job.JobList_ID] && skill_match_dict[job.JobList_ID] !== undefined"
+                                class="card-body">
+                                <div class="flex-row mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title mx-2">{{job.Role_Name}}</h5>
+                                        <div class="d-flex">
+                                            <h5 class="card-text mx-2" style="font-size: 15px; color: grey;">Date Posted: {{job.publish_Date}}</h5>
+                                            <h5 class="card-text closingDate" style="font-size: 15px; color: grey;">Closing Date: {{job.Closing_date}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-row mb-3">
+                                    <div class="col-md-10">
+                                        <!--role description where role name is the key in the roles dictionary-->
+                                        <p class="card-text mx-2 mb-0" :class="{ 'collapsed': !job.showDescription }">
+                                            {{roles[job.Role_Name]}}
+                                        </p>
+                                        <span class="btn btn-link ml-0" @click="toggleDesc(job)">
+                                            {{ job.showDescription ? 'Read Less' : 'Show More' }}
+                                        </span>
+
+                                        
+                                        <!-- Alignment Percentage (remove color coding if necessary)-->
+                                        <div class="card-text m-2">
+                                            <span class="mr-2">Skills Alignment:</span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress flex-grow-1">
+                                                    <div class="progress-bar custom-progress-bar" role="progressbar"
+                                                        :class="{
+                                                            'bg-danger': skill_match_dict[job.JobList_ID].alignment_percentage >= 0 && skill_match_dict[job.JobList_ID].alignment_percentage < 40,
+                                                            'bg-warning': skill_match_dict[job.JobList_ID].alignment_percentage >= 40 && skill_match_dict[job.JobList_ID].alignment_percentage < 60,
+                                                            'bg-success': skill_match_dict[job.JobList_ID].alignment_percentage >= 60
+                                                        }"
+                                                        :style="{ width: skill_match_dict[job.JobList_ID].alignment_percentage + '%', 'min-width': '30px' }">
+                                                        {{ skill_match_dict[job.JobList_ID].alignment_percentage === 0 ?
+                                                        '' : '' }}
+                                                        {{ skill_match_dict[job.JobList_ID].alignment_percentage }}%
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Matched Skills -->
+                                            <p class="matchskills card-text m-2">
+                                                <span class="mr-2"></span>
+                                                <!-- Loop through the role skills -->
+                                                <template v-for="roleSkill in skill_match_dict[job.JobList_ID].role_skills">
+                                                    <!-- Check if the role skill is in the user's skills -->
+                                                    <template v-if="userSkills.includes(roleSkill)">
+                                                        <!-- Display the skill with a green background -->
+                                                        <span id="roleSkill" class="badge rounded-pill bg-success user-skill-label"
+                                                            style="white-space: nowrap;">
+                                                            {{ roleSkill }}
+                                                        </span>
+                                                    </template>
+                                                </template>
+                                                <!-- Loop through the role skills again -->
+                                                <template v-for="roleSkill in skill_match_dict[job.JobList_ID].role_skills">
+                                                    <!-- Check if the role skill is not in the user's skills -->
+                                                    <template v-if="!userSkills.includes(roleSkill)">
+                                                        <!-- Display the skill with an outlined green border -->
+                                                        <span
+                                                            class="badge rounded-pill border border-success user-skill-label text-success m-"
+                                                            style="white-space: nowrap;">
+                                                            {{ roleSkill }}
+                                                        </span>
+                                                    </template>
+                                                </template>
+                                            </p>
+                                        </div>
+                                    </div> 
+                                       <div class="d-flex justify-content-end">
+                                            <button id="Apply/Withdraw_Btn"
+                                                :class="appliedJobs.includes(job.JobList_ID) ? withdrawStyle : applyStyle"
+                                                @click="applyOrWithdraw($event, job.JobList_ID)"
+                                                :apply-staff-id="staffID">
+                                                {{ appliedJobs.includes(job.JobList_ID) ? 'Withdraw Now' : 'Apply Now'
+                                                }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                       
+                                </div>
+
+                                    <!-- Modal to show apply/withdraw error message-->
+                                    <!-- The modal structure with a dynamic error message and close button -->
+                                    <div class="modal fade" id="errorModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Error</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Bind the error message to the Vue data property errorMsg -->
+                                                    <p id="editErrorMessage">{{ errorMsg }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker();
+        });
+    </script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Vue.js 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- External js file -->
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

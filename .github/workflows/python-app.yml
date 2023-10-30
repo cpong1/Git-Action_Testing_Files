@@ -1,121 +1,85 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# Name and description of the workflow
+name: Python Application CI/CD
 
-name: Python application
-
+# Trigger the workflow on pushes to the 'main' branch
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
 
+# Define permissions for workflow execution
 permissions:
   contents: read
 
+# Define the jobs to be executed
 jobs:
   run-test:
+    # Set up a matrix for different operating systems (e.g., Ubuntu)
     strategy:
       matrix:
-        os: [ubuntu-latest]   # Specify the runner environment
+        os: [ubuntu-latest]
 
-    runs-on: ${{ matrix.os }}  # Set the runner operating system
+    # Define the runner environment for the job
+    runs-on: ${{ matrix.os }}
 
-    steps:     
-      - name: Checkout
-        uses: actions/checkout@v3      
+    # Define the steps to be executed within the job
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      # Installing dependencies
-      - name: Install pip (upgrade)
-        run: python -m pip install -U pip
-      
-      - name: Install pytest
-        run: pip install pytest
-      
-      - name: Install Selenium
-        run: pip install selenium==3.141.0
-      
-      - name: Install WebDriverManager
-        run: pip install webdriver_manager
-      
-      - name: Upgrade WebDriverManager
-        run: pip install --upgrade webdriver_manager  
-      
-      - name: Install Flask
+      - name: Install Dependencies
         run: |
-          pip install flask
-          pip install flask_sqlalchemy
-          pip install flask_cors
+          python -m pip install -U pip
+          pip install pytest
+          pip install selenium==3.141.0
+          pip install webdriver_manager
+          pip install flask flask_sqlalchemy flask_cors
+          pip install mysql-connector-python
 
-      - name: Setting up a MySQL database using a Docker container
+      - name: Set Up MySQL Database (Docker)
         uses: mirromutth/mysql-action@v1.1
-        with: 
+        with:
           host port: 3306
           container port: 3306
           character set server: 'utf8'
           collation server: 'utf8_general_ci'
           mysql version: '8.0'
-          mysql database: 'test'
+          mysql database: 'SPM_KUIH'
           mysql root password: ''
           mysql user: 'root'
           mysql password: 'root'
 
-      - name: Install mysql-connector-python
-        run: pip install mysql-connector-python
-  
-      - name: install mysql client
+      - name: Install MySQL Client
         run: |
-              sudo apt-get update
-              sudo apt-get install -y  mysql-client 
-      - run: |
-              sudo /etc/init.d/mysql start
-  
-      - run: mysql --version
-      - run: ls
-      - run: sudo apt-get install libmysqlclient-dev
-      - run: sudo apt-get install zlib1g-dev
-      - run: pip3 install mysqlclient
-      - run: pip3 install SQLAlchemy
-      - run: sudo systemctl start mysql.service
-      - run: cat tests/unit/test.sql | sudo mysql -u root --password=root 
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
+          
+      - name: Start MySQL Service
+        run: |
+          sudo /etc/init.d/mysql start
+
+      - name: Install Additional Dependencies
+        run: |
+          sudo apt-get install libmysqlclient-dev
+          sudo apt-get install zlib1g-dev
+          pip3 install mysqlclient
+          pip3 install SQLAlchemy
+          sudo systemctl start mysql.service
+          cat database/test_data.sql | sudo mysql -u root --password=root
 
       - name: Check Database Accessibility
-        run: python check_db_access.py
+        run: python tests/check_db_access.py
 
-      - name: Start Flask app
+      - name: Start Flask Application
         run: |
           export FLASK_APP=app.py
           export FLASK_ENV=development
-          flask run --host=0.0.0.0 --port=5100 &        
+          flask run --host=0.0.0.0 --port=5100 &
 
       - name: Run Python Tests
-        run: |
-          pytest tests/unit
-
-      - name: Upload Screenshot 
-        uses: actions/upload-artifact@v2
-        with:
-          name: Screenshot
-          path: ${{ github.workspace }}/screenshot_1.png
-          if-no-files-found: warn
-        
-      - name: Upload Screenshot 
-        uses: actions/upload-artifact@v2
-        with:
-          name: Screenshot  # Name of the second artifact
-          path: ${{ github.workspace }}/screenshot_2.png
-
-      - name: Upload Screenshot 
-        uses: actions/upload-artifact@v2
-        with:
-          name: Screenshot  # Name of the second artifact
-          path: ${{ github.workspace }}/screenshot_3.png
-
-      - name: Upload Screenshot 
-        uses: actions/upload-artifact@v2
-        with:
-          name: Screenshot  # Name of the second artifact
-          path: ${{ github.workspace }}/screenshot_4.png
+        run: pytest tests/end_to_end/test_script.py
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
+          name: Test Results
           path: pytest-results.xml
